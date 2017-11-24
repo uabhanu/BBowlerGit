@@ -95,7 +95,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 7.3
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9996ea27b0d8c234fb8eef4618dfbcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_launchVelocity: {x: 2, y: 0, z: 400}
+  m_launchVelocity: {x: 2, y: 0, z: 600}
 --- !u!135 &135172729698160674
 SphereCollider:
   m_ObjectHideFlags: 1
