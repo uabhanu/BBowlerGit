@@ -7,27 +7,17 @@ public class Ball : MonoBehaviour
 	AudioSource m_ballSound;
 	Rigidbody m_ballBody;
 
-	[SerializeField] Vector3 m_launchVelocity;
-
 	void Start() 
 	{
 		m_ballBody = GetComponent<Rigidbody>();	
+		m_ballBody.useGravity = false;
+	}
+		
+	public void Launch(Vector3 velocity)
+	{
+		m_ballBody.useGravity = true;
+		m_ballBody.velocity = velocity;
 		m_ballSound = GetComponent<AudioSource>();
-
-		Launch();
-	}
-
-	void Update() 
-	{
-		if(Time.timeScale == 0)
-		{
-			return;
-		}
-	}
-
-	public void Launch()
-	{
-		m_ballBody.velocity = m_launchVelocity;
-		m_ballSound.Play ();
+		m_ballSound.Play();
 	}
 }
