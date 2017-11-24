@@ -39,4 +39,12 @@ public class DragLaunch : MonoBehaviour
 			m_ballLaunched = true;
 		}
 	}
+
+	public void NudgeBall(float amount)
+	{
+		if(!m_ballLaunched)
+		{
+			m_ball.transform.Translate(new Vector3(amount , 0f , 0f));		
+		}
+	}
 }
