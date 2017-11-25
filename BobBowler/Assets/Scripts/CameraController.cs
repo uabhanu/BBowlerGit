@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
 			return;
 		}
 
-		if(transform.position.z <= 1508f)
+		if(m_ball.transform.position.z <= 1508f)
 		{
 			transform.position = m_ball.transform.position + m_offset;	
 		}

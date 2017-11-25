@@ -25,4 +25,12 @@ public class Pin : MonoBehaviour
 
 		return(tiltX < m_standingThreshold || tiltZ < m_standingThreshold);
 	}
+
+	void OnTriggerExit(Collider tri)
+	{
+		if(tri.gameObject.name.Equals("PinSetter"))
+		{
+			Destroy(gameObject);
+		}
+	}
 }

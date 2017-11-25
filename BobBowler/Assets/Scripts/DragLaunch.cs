@@ -6,7 +6,6 @@ using UnityEngine;
 public class DragLaunch : MonoBehaviour 
 {
 	Ball m_ball;
-	bool m_ballLaunched = false;
 	float m_startTime , m_endTime;
 	Vector3 m_dragStart , m_dragEnd;
 
@@ -33,16 +32,16 @@ public class DragLaunch : MonoBehaviour
 
 		Vector3 launchVelocity = new Vector3(launchVelocityX , 0f , launchVelocityZ);
 
-		if(!m_ballLaunched)
+		if(!m_ball.m_inPlay)
 		{
 			m_ball.Launch(launchVelocity);
-			m_ballLaunched = true;
+            m_ball.m_inPlay = true;
 		}
 	}
 
 	public void NudgeBall(float amount)
 	{
-		if(!m_ballLaunched)
+        if(!m_ball.m_inPlay)
 		{
 			m_ball.transform.Translate(new Vector3(amount , 0f , 0f));		
 		}
