@@ -7,20 +7,37 @@ public class PinSetter : MonoBehaviour
 {
     Ball m_ball;
     bool m_ballEnteredBox;
-	[SerializeField] Color m_standingPinsDisplayOutlineColour;
+	[SerializeField] Color m_standingPinsDisplayOutlineColour , m_standingPinsTextOutlineColour;
     float m_lastChangeTime;
 	int m_lastStandingCount = -1;
 
-	[SerializeField] Outline m_standingPinsDisplayOutline;
-	[SerializeField] Text m_standingPinsDisplay;
+    [SerializeField] Outline m_standingPinsDisplayOutline , m_standingPinsTextOutline;
+    [SerializeField] Text m_standingPinsDisplay;
 
 	void Start() 
 	{
         m_ball = FindObjectOfType<Ball>();
+
 		m_standingPinsDisplayOutlineColour = m_standingPinsDisplayOutline.effectColor;
         m_standingPinsDisplayOutlineColour = Color.blue;
         m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
+
+        m_standingPinsTextOutlineColour = m_standingPinsTextOutline.effectColor;
+        m_standingPinsTextOutlineColour = Color.blue;
+        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
 	}
+
+    IEnumerator BallResetRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        m_ball.Reset();
+
+        m_standingPinsDisplayOutlineColour = Color.blue;
+        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
+
+        m_standingPinsTextOutlineColour = Color.blue;
+        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
+    }
 
 	void Update() 
 	{
@@ -63,6 +80,8 @@ public class PinSetter : MonoBehaviour
 			m_ballEnteredBox = true;
 			m_standingPinsDisplayOutlineColour = Color.red;
 			m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
+            m_standingPinsTextOutlineColour = Color.red;
+            m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
 		}
 	}
 
@@ -72,7 +91,9 @@ public class PinSetter : MonoBehaviour
         m_lastStandingCount = -1;
         m_standingPinsDisplayOutlineColour = Color.green;
         m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
-        m_ball.Reset();
+        m_standingPinsTextOutlineColour = Color.green;
+        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
+        StartCoroutine("BallResetRoutine");
     }
 
 	int StandingPins()
