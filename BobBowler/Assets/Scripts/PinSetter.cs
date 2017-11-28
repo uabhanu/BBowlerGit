@@ -7,9 +7,10 @@ public class PinSetter : MonoBehaviour
 {
     Ball m_ball;
     bool m_ballEnteredBox;
-	[SerializeField] Color m_standingPinsDisplayOutlineColour , m_standingPinsTextOutlineColour;
+	Color m_standingPinsDisplayOutlineColour , m_standingPinsTextOutlineColour;
     float m_lastChangeTime;
 	int m_lastStandingCount = -1;
+    Pin[] m_pins;
 
     [SerializeField] Outline m_standingPinsDisplayOutline , m_standingPinsTextOutline;
     [SerializeField] Text m_standingPinsDisplay;
@@ -17,6 +18,7 @@ public class PinSetter : MonoBehaviour
 	void Start() 
 	{
         m_ball = FindObjectOfType<Ball>();
+        m_pins = FindObjectsOfType<Pin>();
 
 		m_standingPinsDisplayOutlineColour = m_standingPinsDisplayOutline.effectColor;
         m_standingPinsDisplayOutlineColour = Color.blue;
@@ -72,7 +74,7 @@ public class PinSetter : MonoBehaviour
             PinsHaveSettled();
         }
 	}
-
+    
 	void OnTriggerEnter(Collider tri)
 	{
 		if(tri.gameObject.name.Equals("PF_Ball"))
@@ -94,6 +96,30 @@ public class PinSetter : MonoBehaviour
         m_standingPinsTextOutlineColour = Color.green;
         m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
         StartCoroutine("BallResetRoutine");
+    }
+
+    public void PinsLower()
+    {
+        foreach(Pin pin in m_pins)
+        {
+            pin.Lower();
+        }
+    }
+
+    public void PinsRaise()
+    {
+        foreach(Pin pin in m_pins)
+        {
+            pin.RaiseIfStanding();
+        }
+    }
+
+    public void PinsRenew()
+    {
+        foreach(Pin pin in m_pins)
+        {
+            pin.Renew();
+        }
     }
 
 	int StandingPins()

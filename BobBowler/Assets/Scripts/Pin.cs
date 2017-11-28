@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour 
 {
-	[SerializeField] float m_standingThreshold;
+    Rigidbody m_pinBody;
+
+    [SerializeField] float m_distanceToRaise , m_standingThreshold;
+
+    void Start()
+    {
+        m_pinBody = GetComponent<Rigidbody>();
+    }
 
 	void Update() 
 	{
@@ -18,13 +25,35 @@ public class Pin : MonoBehaviour
 
 	public bool IsStanding()
 	{
-		Vector3 rotationInEuler = transform.rotation.eulerAngles;
+        if(m_pinBody != null)
+        {
+            Vector3 rotationInEuler = transform.rotation.eulerAngles;
 
-		float tiltX = Mathf.Abs(rotationInEuler.x);
-		float tiltZ = Mathf.Abs(rotationInEuler.z);
+            float tiltX = Mathf.Abs(rotationInEuler.x);
+            float tiltZ = Mathf.Abs(rotationInEuler.z);
 
-		return(tiltX < m_standingThreshold || tiltZ < m_standingThreshold);
+            return(tiltX < m_standingThreshold || tiltZ < m_standingThreshold);
+        }
+        else
+        {
+            Debug.LogError("Sir Bhanu, there are no pins, let alone standing");
+        }
+
+        return false;
 	}
+
+    public void Lower()
+    {
+        if(m_pinBody != null)
+        {
+            transform.Translate(new Vector3(0f , -m_distanceToRaise , 0f) , Space.World);
+            m_pinBody.useGravity = true;
+        }
+        else
+        {
+            Debug.LogError("Sir Bhanu, there are no pins to Lower");
+        }
+    }
 
 	void OnTriggerExit(Collider tri)
 	{
@@ -33,4 +62,18 @@ public class Pin : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
+
+    public void RaiseIfStanding()
+    {
+        if(IsStanding())
+        {
+            m_pinBody.useGravity = false;
+            transform.Translate(new Vector3(0f , m_distanceToRaise , 0f) , Space.World);
+        }
+    }
+
+    public void Renew()
+    {
+        Debug.Log("Renew Pins");
+    }
 }

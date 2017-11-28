@@ -192,4 +192,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4315f6b67e45c46965548cf90f56f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_distanceToRaise: 50
   m_standingThreshold: 3
