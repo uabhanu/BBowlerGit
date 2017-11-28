@@ -71,9 +71,4 @@ public class Pin : MonoBehaviour
             transform.Translate(new Vector3(0f , m_distanceToRaise , 0f) , Space.World);
         }
     }
-
-    public void Renew()
-    {
-        Debug.Log("Renew Pins");
-    }
 }

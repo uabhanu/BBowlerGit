@@ -9,9 +9,11 @@ public class PinSetter : MonoBehaviour
     bool m_ballEnteredBox;
 	Color m_standingPinsDisplayOutlineColour , m_standingPinsTextOutlineColour;
     float m_lastChangeTime;
+    GameObject m_pinsPrefabInScene;
 	int m_lastStandingCount = -1;
     Pin[] m_pins;
 
+    [SerializeField] GameObject m_pinsPrefab;
     [SerializeField] Outline m_standingPinsDisplayOutline , m_standingPinsTextOutline;
     [SerializeField] Text m_standingPinsDisplay;
 
@@ -19,6 +21,7 @@ public class PinSetter : MonoBehaviour
 	{
         m_ball = FindObjectOfType<Ball>();
         m_pins = FindObjectsOfType<Pin>();
+        m_pinsPrefabInScene = GameObject.FindGameObjectWithTag("Pins");
 
 		m_standingPinsDisplayOutlineColour = m_standingPinsDisplayOutline.effectColor;
         m_standingPinsDisplayOutlineColour = Color.blue;
@@ -52,11 +55,11 @@ public class PinSetter : MonoBehaviour
 
         if(m_ballEnteredBox)
         {
-            CheckStanding();
+            PinsStandingAndSettle();
         }
 	}
 
-	void CheckStanding()
+	void PinsStandingAndSettle()
 	{
 		int currentStanding = StandingPins();
 
@@ -116,9 +119,12 @@ public class PinSetter : MonoBehaviour
 
     public void PinsRenew()
     {
-        foreach(Pin pin in m_pins)
+        Debug.Log("Pins Renew");
+        Instantiate(m_pinsPrefab , new Vector3(0f , 0f , 1829f) , Quaternion.identity);
+
+        if(m_pinsPrefabInScene.transform.childCount == 0)
         {
-            pin.Renew();
+            Destroy(m_pinsPrefabInScene.gameObject);
         }
     }
 

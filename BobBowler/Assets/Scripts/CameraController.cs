@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
 	Vector3 m_offset;
 
 	[SerializeField] Ball m_ball;
+    [SerializeField] float m_stopPosition;
 
 	void Start()
 	{
@@ -20,7 +21,7 @@ public class CameraController : MonoBehaviour
 			return;
 		}
 
-		if(m_ball.transform.position.z <= 1508f)
+        if(m_ball.transform.position.z <= m_stopPosition)
 		{
 			transform.position = m_ball.transform.position + m_offset;	
 		}
