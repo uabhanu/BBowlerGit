@@ -6,44 +6,39 @@ using UnityEngine.UI;
 public class PinSetter : MonoBehaviour 
 {
     Animator m_animator;
-    BhanuAction m_bhanuAction = new BhanuAction();
+    BhanuAction m_bhanuAction = new BhanuAction(); //Keep this here in global scope as we need only 1 instance
     Ball m_ball;
-    bool m_ballEnteredBox;
-	Color m_standingPinsDisplayOutlineColour , m_standingPinsTextOutlineColour;
-    float m_lastChangeTime;
+    float m_lastChangeTime , m_pinSetterBallResetTime = 5f;
     GameObject m_pinsPrefabInScene;
+    GutterBallCheck m_gutterBallCheck;
 	int m_lastSettledCount = 10 , m_lastStandingCount = -1;
     Pin[] m_pins;
 
     [SerializeField] GameObject m_pinsPrefab;
-    [SerializeField] Outline m_standingPinsDisplayOutline , m_standingPinsTextOutline;
-    [SerializeField] Text m_standingPinsDisplay;
+
+    public bool m_ballOutOfPlay;
+    public Color m_standingPinsDisplayOutlineColour , m_standingPinsTextOutlineColour;
+    public float m_ballResetTime;
+    public Outline m_standingPinsDisplayOutline , m_standingPinsTextOutline;
+    public Text m_standingPinsDisplay;
 
 	void Start() 
 	{
         m_animator = GetComponent<Animator>();
         m_ball = FindObjectOfType<Ball>();
+        m_ballResetTime = m_pinSetterBallResetTime;
+        m_gutterBallCheck = FindObjectOfType<GutterBallCheck>();
         m_pins = FindObjectsOfType<Pin>();
 
 		m_standingPinsDisplayOutlineColour = m_standingPinsDisplayOutline.effectColor;
-        m_standingPinsDisplayOutlineColour = Color.blue;
-        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
-
         m_standingPinsTextOutlineColour = m_standingPinsTextOutline.effectColor;
-        m_standingPinsTextOutlineColour = Color.blue;
-        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
 	}
 
     IEnumerator BallResetRoutine()
     {
-        yield return new WaitForSeconds(5f);
-        m_ball.Reset();
-
-        m_standingPinsDisplayOutlineColour = Color.blue;
-        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
-
-        m_standingPinsTextOutlineColour = Color.blue;
-        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
+        yield return new WaitForSeconds(m_ballResetTime);
+        m_ball.Reset();   
+        m_ballResetTime = m_pinSetterBallResetTime;
     }
 
 	void Update() 
@@ -55,7 +50,7 @@ public class PinSetter : MonoBehaviour
 			
 		m_standingPinsDisplay.text = StandingPins().ToString();
 
-        if(m_ballEnteredBox)
+        if(m_ballOutOfPlay)
         {
             PinsStandingAndSettle();
         }
@@ -82,9 +77,9 @@ public class PinSetter : MonoBehaviour
     
 	void OnTriggerEnter(Collider tri)
 	{
-		if(tri.gameObject.name.Equals("PF_Ball"))
+		if(tri.gameObject.tag.Equals("Ball"))
 		{
-			m_ballEnteredBox = true;
+            m_ballOutOfPlay = true;
 			m_standingPinsDisplayOutlineColour = Color.red;
 			m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
             m_standingPinsTextOutlineColour = Color.red;
@@ -94,27 +89,35 @@ public class PinSetter : MonoBehaviour
 
     void PinsHaveSettled()
     {
-        m_ballEnteredBox = false;
-        m_lastStandingCount = -1;
         m_standingPinsDisplayOutlineColour = Color.green;
         m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
         m_standingPinsTextOutlineColour = Color.green;
         m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
 
+        m_ballOutOfPlay = false;
+        m_lastStandingCount = -1;
         int standingPins = StandingPins();
         int pinsFell = m_lastSettledCount - standingPins;
         m_lastSettledCount = standingPins; //Commented this line if any issues
+
         BhanuAction.Action action = m_bhanuAction.Bowl(pinsFell);
+        Debug.Log("Pins Fell : " + pinsFell + " " + action);
 
         if(action == BhanuAction.Action.TIDY)
         {
-            m_animator.SetTrigger("Tidy");
-            StartCoroutine("BallResetRoutine");
+            if(StandingPins() < 10)
+            {
+                m_animator.SetTrigger("Tidy");
+                m_ballResetTime = m_pinSetterBallResetTime;    
+            }
+
+            StartCoroutine("BallResetRoutine");   
         }
 
         else if(action == BhanuAction.Action.ENDTURN || action == BhanuAction.Action.RESET)
         {
             m_animator.SetTrigger("Reset");
+            m_ballResetTime = m_pinSetterBallResetTime;
             m_lastSettledCount = 10;
             StartCoroutine("BallResetRoutine");
         }
@@ -127,6 +130,12 @@ public class PinSetter : MonoBehaviour
 
     public void PinsLower()
     {
+        Debug.Log("Pins Lower");
+        m_standingPinsDisplayOutlineColour = Color.green;
+        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
+        m_standingPinsTextOutlineColour = Color.green;
+        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
+
         foreach(Pin pin in m_pins)
         {
             pin.Lower();
@@ -135,6 +144,12 @@ public class PinSetter : MonoBehaviour
 
     public void PinsRaise()
     {
+        Debug.Log("Pins Setter Pins Raise");
+        m_standingPinsDisplayOutlineColour = Color.green;
+        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
+        m_standingPinsTextOutlineColour = Color.green;
+        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
+
         foreach(Pin pin in m_pins)
         {
             pin.RaiseIfStanding();
@@ -144,6 +159,10 @@ public class PinSetter : MonoBehaviour
     public void PinsRenew()
     {
         Debug.Log("Pins Renew");
+        m_standingPinsDisplayOutlineColour = Color.green;
+        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
+        m_standingPinsTextOutlineColour = Color.green;
+        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
         Instantiate(m_pinsPrefab , new Vector3(0f , 0f , 1829f) , Quaternion.identity);
         m_pinsPrefabInScene = GameObject.FindGameObjectWithTag("Pins");
 

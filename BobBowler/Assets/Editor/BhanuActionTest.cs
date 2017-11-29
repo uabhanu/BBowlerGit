@@ -123,4 +123,11 @@ public class BhanuActionTest
         Assert.AreEqual(m_reset , m_bhanuAction.Bowl(10));
         Assert.AreEqual(m_endGame , m_bhanuAction.Bowl(10));
     }
+
+    [Test]
+    public void T10ZeroOneGivesEndTurn() 
+    {
+        m_bhanuAction.Bowl(0);
+        Assert.AreEqual(m_endTurn , m_bhanuAction.Bowl(1));
+    }
 }
