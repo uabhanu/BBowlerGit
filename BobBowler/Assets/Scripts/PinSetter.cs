@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class PinSetter : MonoBehaviour 
 {
+    Animator m_animator;
+    BhanuAction m_bhanuAction = new BhanuAction();
     Ball m_ball;
     bool m_ballEnteredBox;
 	Color m_standingPinsDisplayOutlineColour , m_standingPinsTextOutlineColour;
     float m_lastChangeTime;
     GameObject m_pinsPrefabInScene;
-	int m_lastStandingCount = -1;
+	int m_lastSettledCount = 10 , m_lastStandingCount = -1;
     Pin[] m_pins;
 
     [SerializeField] GameObject m_pinsPrefab;
@@ -19,9 +21,9 @@ public class PinSetter : MonoBehaviour
 
 	void Start() 
 	{
+        m_animator = GetComponent<Animator>();
         m_ball = FindObjectOfType<Ball>();
         m_pins = FindObjectsOfType<Pin>();
-        m_pinsPrefabInScene = GameObject.FindGameObjectWithTag("Pins");
 
 		m_standingPinsDisplayOutlineColour = m_standingPinsDisplayOutline.effectColor;
         m_standingPinsDisplayOutlineColour = Color.blue;
@@ -34,7 +36,7 @@ public class PinSetter : MonoBehaviour
 
     IEnumerator BallResetRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         m_ball.Reset();
 
         m_standingPinsDisplayOutlineColour = Color.blue;
@@ -98,7 +100,29 @@ public class PinSetter : MonoBehaviour
         m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
         m_standingPinsTextOutlineColour = Color.green;
         m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
-        StartCoroutine("BallResetRoutine");
+
+        int standingPins = StandingPins();
+        int pinsFell = m_lastSettledCount - standingPins;
+        m_lastSettledCount = standingPins; //Commented this line if any issues
+        BhanuAction.Action action = m_bhanuAction.Bowl(pinsFell);
+
+        if(action == BhanuAction.Action.TIDY)
+        {
+            m_animator.SetTrigger("Tidy");
+            StartCoroutine("BallResetRoutine");
+        }
+
+        else if(action == BhanuAction.Action.ENDTURN || action == BhanuAction.Action.RESET)
+        {
+            m_animator.SetTrigger("Reset");
+            m_lastSettledCount = 10;
+            StartCoroutine("BallResetRoutine");
+        }
+
+        else if(action == BhanuAction.Action.ENDGAME)
+        {
+            throw new UnityException("Sir Bhanu, You haven't told me how to handle EndGame yet");
+        }
     }
 
     public void PinsLower()
@@ -121,6 +145,7 @@ public class PinSetter : MonoBehaviour
     {
         Debug.Log("Pins Renew");
         Instantiate(m_pinsPrefab , new Vector3(0f , 0f , 1829f) , Quaternion.identity);
+        m_pinsPrefabInScene = GameObject.FindGameObjectWithTag("Pins");
 
         if(m_pinsPrefabInScene.transform.childCount == 0)
         {
