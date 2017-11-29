@@ -20,27 +20,49 @@ public class BhanuAction
             return Action.ENDGAME;
         }
 
-        if(bowl >= 19 && Bowl21Awarded())
+        if(bowl >= 19 && pins == 10)
         {
-            bowl += 1;
+            bowl ++;
             return Action.RESET;
         }
 
-        else if(bowl == 20 && !Bowl21Awarded())
+        else if(bowl == 20)
         {
-            return Action.ENDGAME;
-        }
+            bowl++;
 
-        if(pins == 10)
-        {
-            bowl += 2;
-            return Action.ENDTURN;
+            if(bowls[19-1] == 10 && bowls[20-1] == 0)
+            {
+                return Action.TIDY;
+            }
+
+            else if(bowls[19-1] + bowls[20-1] == 10)
+            {
+                return Action.RESET;
+            }
+
+            else if(Bowl21Awarded())
+            {
+                return Action.TIDY;
+            }
+
+            else
+            {
+                return Action.ENDGAME;
+            }
         }
 
         if(bowl % 2 != 0)
         {
-            bowl += 1;
-            return Action.TIDY;
+            if(pins == 10)
+            {
+                bowl += 2;
+                return Action.ENDTURN;
+            }
+            else
+            {
+                bowl += 1;
+                return Action.TIDY;
+            }
         }
 
         else if(bowl % 2 == 0)

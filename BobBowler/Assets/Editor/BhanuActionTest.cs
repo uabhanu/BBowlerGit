@@ -95,4 +95,32 @@ public class BhanuActionTest
 
         Assert.AreEqual(m_endGame , m_bhanuAction.Bowl(1));
     }
+
+    [Test]
+    public void T08NathanBowlIndexTest() 
+    {
+        int[] rolls =  {0 , 10 , 5};
+
+        foreach(int roll in rolls)
+        {
+            m_bhanuAction.Bowl(roll);
+        }
+
+        Assert.AreEqual(m_endTurn , m_bhanuAction.Bowl(1));
+    }
+
+    [Test]
+    public void T09Dondi10thFrameTurkey() 
+    {
+        int[] rolls =  {1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1};
+
+        foreach(int roll in rolls)
+        {
+            m_bhanuAction.Bowl(roll);
+        }
+
+        Assert.AreEqual(m_reset , m_bhanuAction.Bowl(10));
+        Assert.AreEqual(m_reset , m_bhanuAction.Bowl(10));
+        Assert.AreEqual(m_endGame , m_bhanuAction.Bowl(10));
+    }
 }
