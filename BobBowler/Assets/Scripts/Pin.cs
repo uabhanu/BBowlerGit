@@ -67,7 +67,7 @@ public class Pin : MonoBehaviour
     {
         if(IsStanding())
         {
-            Debug.Log("Pins Raise");
+            //Debug.Log("Pins Raise");
             m_pinBody.useGravity = false;
             transform.Translate(new Vector3(0f , m_distanceToRaise , 0f) , Space.World);
         }

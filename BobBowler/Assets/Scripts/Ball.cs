@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
 	AudioSource m_ballSound;
     PinSetter m_pinSetter;
+    Quaternion m_startRotation;
 	Rigidbody m_ballBody;
     Vector3 m_startPosition;
 
@@ -17,6 +18,7 @@ public class Ball : MonoBehaviour
 		m_ballBody.useGravity = false;
         m_pinSetter = FindObjectOfType<PinSetter>();
         m_startPosition = transform.position;
+        m_startRotation = transform.rotation;
 	}
 		
 	public void Launch(Vector3 velocity)
@@ -29,12 +31,13 @@ public class Ball : MonoBehaviour
 
     public void Reset()
     {
-        Debug.Log("Ball Reset");
+        //Debug.Log("Ball Reset");
         m_ballBody.angularVelocity = Vector3.zero;
         m_ballBody.useGravity = false;
         m_ballBody.velocity = Vector3.zero;
         m_inPlay = false;
         transform.position = m_startPosition;
+        transform.rotation = m_startRotation;
         m_pinSetter.m_standingPinsDisplayOutlineColour = Color.green;
         m_pinSetter.m_standingPinsDisplayOutline.effectColor = m_pinSetter.m_standingPinsDisplayOutlineColour;
         m_pinSetter.m_standingPinsTextOutlineColour = Color.green;

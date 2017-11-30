@@ -97,7 +97,33 @@ public class BhanuActionTest
     }
 
     [Test]
-    public void T08NathanBowlIndexTest() 
+    public void T08DarylBowl20Test() 
+    {
+        int[] rolls =  {1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 10};
+
+        foreach(int roll in rolls)
+        {
+            m_bhanuAction.Bowl(roll);
+        }
+
+        Assert.AreEqual(m_tidy , m_bhanuAction.Bowl(5));
+    }
+
+    [Test]
+    public void T09BensBowl20Test() 
+    {
+        int[] rolls =  {1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 10};
+
+        foreach(int roll in rolls)
+        {
+            m_bhanuAction.Bowl(roll);
+        }
+
+        Assert.AreEqual(m_tidy , m_bhanuAction.Bowl(0));
+    }
+
+    [Test]
+    public void T10NathanBowlIndexTest() 
     {
         int[] rolls =  {0 , 10 , 5};
 
@@ -110,7 +136,7 @@ public class BhanuActionTest
     }
 
     [Test]
-    public void T09Dondi10thFrameTurkey() 
+    public void T11Dondi10thFrameTurkey() 
     {
         int[] rolls =  {1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1 , 1,1};
 
@@ -125,9 +151,15 @@ public class BhanuActionTest
     }
 
     [Test]
-    public void T10ZeroOneGivesEndTurn() 
+    public void T12ZeroOneGivesEndTurn() 
     {
         m_bhanuAction.Bowl(0);
         Assert.AreEqual(m_endTurn , m_bhanuAction.Bowl(1));
+    }
+
+    [Test]
+    public void T13BhanuBowl7ReturnsTidy() 
+    {
+        Assert.AreEqual(m_tidy , m_bhanuAction.Bowl(7));
     }
 }

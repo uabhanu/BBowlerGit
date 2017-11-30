@@ -8,7 +8,7 @@ public class PinSetter : MonoBehaviour
     Animator m_animator;
     BhanuAction m_bhanuAction = new BhanuAction(); //Keep this here in global scope as we need only 1 instance
     Ball m_ball;
-    float m_lastChangeTime , m_pinSetterBallResetTime = 5f;
+    float m_lastChangeTime , m_pinSetterBallResetTime = 15f;
     GameObject m_pinsPrefabInScene;
     GutterBallCheck m_gutterBallCheck;
 	int m_lastSettledCount = 10 , m_lastStandingCount = -1;
@@ -33,14 +33,7 @@ public class PinSetter : MonoBehaviour
 		m_standingPinsDisplayOutlineColour = m_standingPinsDisplayOutline.effectColor;
         m_standingPinsTextOutlineColour = m_standingPinsTextOutline.effectColor;
 	}
-
-    IEnumerator BallResetRoutine()
-    {
-        yield return new WaitForSeconds(m_ballResetTime);
-        m_ball.Reset();   
-        m_ballResetTime = m_pinSetterBallResetTime;
-    }
-
+ 
 	void Update() 
 	{
 		if(Time.timeScale == 0)
@@ -56,7 +49,7 @@ public class PinSetter : MonoBehaviour
         }
 	}
 
-	void PinsStandingAndSettle()
+	public void PinsStandingAndSettle()
 	{
 		int currentStanding = StandingPins();
 
@@ -72,6 +65,7 @@ public class PinSetter : MonoBehaviour
         if((Time.time  - m_lastChangeTime) > settleTime)
         {
             PinsHaveSettled();
+            m_ball.Reset();
         }
 	}
     
@@ -101,17 +95,13 @@ public class PinSetter : MonoBehaviour
         m_lastSettledCount = standingPins; //Commented this line if any issues
 
         BhanuAction.Action action = m_bhanuAction.Bowl(pinsFell);
-        Debug.Log("Pins Fell : " + pinsFell + " " + action);
+        //Debug.Log("Pins Fell : " + pinsFell + " " + action);
+        Debug.Log("Pins Standing : " + standingPins + " " + action);
 
-        if(action == BhanuAction.Action.TIDY)
+        if(action == BhanuAction.Action.TIDY && standingPins < 10)
         {
-            if(StandingPins() < 10)
-            {
-                m_animator.SetTrigger("Tidy");
-                m_ballResetTime = m_pinSetterBallResetTime;    
-            }
-
-            StartCoroutine("BallResetRoutine");   
+            m_animator.SetTrigger("Tidy");
+            m_ballResetTime = m_pinSetterBallResetTime;    
         }
 
         else if(action == BhanuAction.Action.ENDTURN || action == BhanuAction.Action.RESET)
@@ -119,7 +109,6 @@ public class PinSetter : MonoBehaviour
             m_animator.SetTrigger("Reset");
             m_ballResetTime = m_pinSetterBallResetTime;
             m_lastSettledCount = 10;
-            StartCoroutine("BallResetRoutine");
         }
 
         else if(action == BhanuAction.Action.ENDGAME)
@@ -130,7 +119,7 @@ public class PinSetter : MonoBehaviour
 
     public void PinsLower()
     {
-        Debug.Log("Pins Lower");
+        //Debug.Log("Pins Lower");
         m_standingPinsDisplayOutlineColour = Color.green;
         m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
         m_standingPinsTextOutlineColour = Color.green;
@@ -144,7 +133,7 @@ public class PinSetter : MonoBehaviour
 
     public void PinsRaise()
     {
-        Debug.Log("Pins Setter Pins Raise");
+        //Debug.Log("Pins Setter Pins Raise");
         m_standingPinsDisplayOutlineColour = Color.green;
         m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
         m_standingPinsTextOutlineColour = Color.green;
@@ -158,7 +147,7 @@ public class PinSetter : MonoBehaviour
 
     public void PinsRenew()
     {
-        Debug.Log("Pins Renew");
+        //Debug.Log("Pins Renew");
         m_standingPinsDisplayOutlineColour = Color.green;
         m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
         m_standingPinsTextOutlineColour = Color.green;
