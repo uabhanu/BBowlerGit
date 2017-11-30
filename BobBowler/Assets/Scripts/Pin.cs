@@ -32,6 +32,7 @@ public class Pin : MonoBehaviour
             float tiltX = Mathf.Abs(rotationInEuler.x);
             float tiltZ = Mathf.Abs(rotationInEuler.z);
 
+            //Debug.Log(tiltX < m_standingThreshold || tiltZ < m_standingThreshold);
             return(tiltX < m_standingThreshold || tiltZ < m_standingThreshold);
         }
         else
@@ -39,14 +40,14 @@ public class Pin : MonoBehaviour
             Debug.LogError("Sir Bhanu, there are no pins, let alone standing");
         }
 
-        return false;
+        return true;
 	}
 
     public void Lower()
     {
         if(m_pinBody != null)
         {
-            transform.Translate(new Vector3(0f , -m_distanceToRaise , 0f) , Space.World);
+            transform.Translate(new Vector3(0f , -m_distanceToRaise , 0f));
             m_pinBody.useGravity = true;
         }
         else
@@ -65,11 +66,11 @@ public class Pin : MonoBehaviour
 
     public void RaiseIfStanding()
     {
-        if(IsStanding())
+        if(IsStanding()) 
         {
-            //Debug.Log("Pins Raise");
+            Debug.Log("Pins Raise");
             m_pinBody.useGravity = false;
-            transform.Translate(new Vector3(0f , m_distanceToRaise , 0f) , Space.World);
+            transform.Translate(new Vector3(0f , m_distanceToRaise , 0f)); //This is moving pin forward instead of up, easy debug
         }
     }
 }

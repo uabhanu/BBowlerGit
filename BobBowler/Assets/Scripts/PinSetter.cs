@@ -96,7 +96,7 @@ public class PinSetter : MonoBehaviour
 
         BhanuAction.Action action = m_bhanuAction.Bowl(pinsFell);
         //Debug.Log("Pins Fell : " + pinsFell + " " + action);
-        Debug.Log("Pins Standing : " + standingPins + " " + action);
+        //Debug.Log("Pins Standing : " + standingPins + " " + action);
 
         if(action == BhanuAction.Action.TIDY && standingPins < 10)
         {
@@ -142,6 +142,7 @@ public class PinSetter : MonoBehaviour
         foreach(Pin pin in m_pins)
         {
             pin.RaiseIfStanding();
+            pin.transform.rotation = Quaternion.Euler(270f , 0f , 0f);
         }
     }
 
