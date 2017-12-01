@@ -9,7 +9,7 @@ public class BhanuAction
 
     public enum Action{TIDY , RESET , ENDTURN , ENDGAME};
 
-	public Action Bowl(int pins)
+	public Action Bowl(int pins) //TODO remove public
     {
         if(pins < 0 || pins > 10){throw new UnityException("Sir Bhanu, Pins count is not equal to 10");}
 
@@ -72,6 +72,19 @@ public class BhanuAction
         }
 
         throw new UnityException("Sir Bhanu, not sure what action to return");
+    }
+
+    public static Action NextAction(List<int> pinFalls)
+    {
+        BhanuAction bhanuAction = new BhanuAction();
+        Action currentAction = new Action();
+
+        foreach(int pinFall in pinFalls)
+        {
+            currentAction = bhanuAction.Bowl(pinFall);
+        }
+
+        return currentAction;
     }
 
     bool Bowl21Awarded()
