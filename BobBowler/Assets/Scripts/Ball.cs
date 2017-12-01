@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
 	AudioSource m_ballSound;
     bool m_inPlay = false;
-    PinSetter m_pinSetter;
+    PinCounter m_pinCounter;
     Quaternion m_startRotation;
 	Rigidbody m_ballBody;
     Vector3 m_startPosition;
@@ -15,7 +15,7 @@ public class Ball : MonoBehaviour
 	{
 		m_ballBody = GetComponent<Rigidbody>();	
 		m_ballBody.useGravity = false;
-        m_pinSetter = FindObjectOfType<PinSetter>();
+        m_pinCounter = FindObjectOfType<PinCounter>();
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
 	}
@@ -49,9 +49,9 @@ public class Ball : MonoBehaviour
         m_inPlay = false;
         transform.position = m_startPosition;
         transform.rotation = m_startRotation;
-        m_pinSetter.m_standingPinsDisplayOutlineColour = Color.green;
-        m_pinSetter.m_standingPinsDisplayOutline.effectColor = m_pinSetter.m_standingPinsDisplayOutlineColour;
-        m_pinSetter.m_standingPinsTextOutlineColour = Color.green;
-        m_pinSetter.m_standingPinsTextOutline.effectColor = m_pinSetter.m_standingPinsTextOutlineColour;
+        m_pinCounter.m_standingPinsDisplayOutlineColour = Color.green;
+        m_pinCounter.m_standingPinsDisplayOutline.effectColor = m_pinCounter.m_standingPinsDisplayOutlineColour;
+        m_pinCounter.m_standingPinsTextOutlineColour = Color.green;
+        m_pinCounter.m_standingPinsTextOutline.effectColor = m_pinCounter.m_standingPinsTextOutlineColour;
     }
 }

@@ -9,7 +9,7 @@ public class BhanuAction
 
     public enum Action{TIDY , RESET , ENDTURN , ENDGAME};
 
-	public Action Bowl(int pins) //TODO remove public
+	Action Bowl(int pins)
     {
         if(pins < 0 || pins > 10){throw new UnityException("Sir Bhanu, Pins count is not equal to 10");}
 
