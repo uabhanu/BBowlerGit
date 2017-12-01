@@ -31,19 +31,7 @@ public class DragLaunch : MonoBehaviour
 		float launchVelocityZ = (m_dragEnd.y - m_dragStart.y) / dragDuration;
 
 		Vector3 launchVelocity = new Vector3(launchVelocityX , 0f , launchVelocityZ);
-
-		if(!m_ball.m_inPlay)
-		{
-			m_ball.Launch(launchVelocity);
-            m_ball.m_inPlay = true;
-		}
-	}
-
-	public void NudgeBall(float amount)
-	{
-        if(!m_ball.m_inPlay)
-		{
-			m_ball.transform.Translate(new Vector3(amount , 0f , 0f));		
-		}
+       
+		m_ball.Launch(launchVelocity);	
 	}
 }

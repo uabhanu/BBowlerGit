@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour 
 {
+    Pin[] m_pins;
     Rigidbody m_pinBody;
 
+    [SerializeField] bool m_isStanding;
     [SerializeField] float m_distanceToRaise , m_standingThreshold;
 
     void Start()
     {
         m_pinBody = GetComponent<Rigidbody>();
+        m_pins = FindObjectsOfType<Pin>();
     }
 
 	void Update() 
@@ -21,6 +24,16 @@ public class Pin : MonoBehaviour
 		}
 
 		IsStanding();
+
+        if(IsStanding())
+        {
+            m_isStanding = true;
+        }
+
+        if(!IsStanding())
+        {
+            m_isStanding = false;
+        }
 	}
 
 	public bool IsStanding()
@@ -47,7 +60,7 @@ public class Pin : MonoBehaviour
     {
         if(m_pinBody != null)
         {
-            transform.Translate(new Vector3(0f , -m_distanceToRaise , 0f));
+            transform.Translate(new Vector3(0f , -m_distanceToRaise , 0f) , Space.World);
             m_pinBody.useGravity = true;
         }
         else
@@ -66,11 +79,17 @@ public class Pin : MonoBehaviour
 
     public void RaiseIfStanding()
     {
-        if(IsStanding()) 
+        if(m_pinBody != null && m_isStanding) 
         {
-            Debug.Log("Pins Raise");
+            //Debug.Log("Pins Raise");
+            Debug.Log(m_pinBody.gameObject.name);
             m_pinBody.useGravity = false;
-            transform.Translate(new Vector3(0f , m_distanceToRaise , 0f)); //This is moving pin forward instead of up, easy debug
+            transform.Translate(new Vector3(0f , m_distanceToRaise , 0f) , Space.World); 
+            //This is only applying randomly to selected number of standing pins rather than all standing pins, question posted on Udemy
+        }
+        else
+        {
+            Debug.LogError("Sir Bhanu, there are no pins, let alone standing");
         }
     }
 }

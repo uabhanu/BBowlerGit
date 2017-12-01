@@ -5,12 +5,11 @@ using UnityEngine;
 public class Ball : MonoBehaviour 
 {
 	AudioSource m_ballSound;
+    bool m_inPlay = false;
     PinSetter m_pinSetter;
     Quaternion m_startRotation;
 	Rigidbody m_ballBody;
     Vector3 m_startPosition;
-
-    [HideInInspector] public bool m_inPlay = false;
 
 	void Start() 
 	{
@@ -23,11 +22,23 @@ public class Ball : MonoBehaviour
 		
 	public void Launch(Vector3 velocity)
 	{
-		m_ballBody.useGravity = true;
-		m_ballBody.velocity = velocity;
-		m_ballSound = GetComponent<AudioSource>();
-		m_ballSound.Play();
+        if(!m_inPlay)
+        {
+            m_ballBody.useGravity = true;
+            m_ballBody.velocity = velocity;
+            m_ballSound = GetComponent<AudioSource>();
+            m_ballSound.Play();   
+            m_inPlay = true;
+        }
 	}
+
+    public void Nudge(float amount)
+    {
+        if(!m_inPlay)
+        {
+            transform.Translate(new Vector3(amount , 0f , 0f));      
+        }
+    }
 
     public void Reset()
     {

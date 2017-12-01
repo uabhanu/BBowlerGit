@@ -92,13 +92,13 @@ public class PinSetter : MonoBehaviour
         m_lastStandingCount = -1;
         int standingPins = StandingPins();
         int pinsFell = m_lastSettledCount - standingPins;
-        m_lastSettledCount = standingPins; //Commented this line if any issues
+        m_lastSettledCount = standingPins; //Comment this line if any issues
 
         BhanuAction.Action action = m_bhanuAction.Bowl(pinsFell);
         //Debug.Log("Pins Fell : " + pinsFell + " " + action);
         //Debug.Log("Pins Standing : " + standingPins + " " + action);
 
-        if(action == BhanuAction.Action.TIDY && standingPins < 10)
+        if(action == BhanuAction.Action.TIDY)
         {
             m_animator.SetTrigger("Tidy");
             m_ballResetTime = m_pinSetterBallResetTime;    
@@ -119,12 +119,6 @@ public class PinSetter : MonoBehaviour
 
     public void PinsLower()
     {
-        //Debug.Log("Pins Lower");
-        m_standingPinsDisplayOutlineColour = Color.green;
-        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
-        m_standingPinsTextOutlineColour = Color.green;
-        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
-
         foreach(Pin pin in m_pins)
         {
             pin.Lower();
@@ -133,12 +127,6 @@ public class PinSetter : MonoBehaviour
 
     public void PinsRaise()
     {
-        //Debug.Log("Pins Setter Pins Raise");
-        m_standingPinsDisplayOutlineColour = Color.green;
-        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
-        m_standingPinsTextOutlineColour = Color.green;
-        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
-
         foreach(Pin pin in m_pins)
         {
             pin.RaiseIfStanding();
@@ -148,11 +136,6 @@ public class PinSetter : MonoBehaviour
 
     public void PinsRenew()
     {
-        //Debug.Log("Pins Renew");
-        m_standingPinsDisplayOutlineColour = Color.green;
-        m_standingPinsDisplayOutline.effectColor = m_standingPinsDisplayOutlineColour;
-        m_standingPinsTextOutlineColour = Color.green;
-        m_standingPinsTextOutline.effectColor = m_standingPinsTextOutlineColour;
         Instantiate(m_pinsPrefab , new Vector3(0f , 0f , 1829f) , Quaternion.identity);
         m_pinsPrefabInScene = GameObject.FindGameObjectWithTag("Pins");
 
