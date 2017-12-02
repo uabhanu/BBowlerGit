@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 193510280}
   - component: {fileID: 193510282}
   - component: {fileID: 193510281}
+  - component: {fileID: 193510283}
   m_Layer: 5
   m_Name: ScoresPanel
   m_TagString: Untagged
@@ -190,6 +191,50 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 193510279}
+--- !u!114 &193510283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193510279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4537fc00499b76943af7cfd476a7d249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_frameTexts:
+  - {fileID: 1189415694}
+  - {fileID: 398592199}
+  - {fileID: 1910624748}
+  - {fileID: 1164229830}
+  - {fileID: 1519785144}
+  - {fileID: 1171579252}
+  - {fileID: 1500039923}
+  - {fileID: 1829569450}
+  - {fileID: 1806094086}
+  - {fileID: 221520722}
+  m_rollTexts:
+  - {fileID: 394562117}
+  - {fileID: 1157606507}
+  - {fileID: 1849754346}
+  - {fileID: 397127598}
+  - {fileID: 1739838479}
+  - {fileID: 2035233999}
+  - {fileID: 1468611958}
+  - {fileID: 1808559432}
+  - {fileID: 1243536625}
+  - {fileID: 1614399459}
+  - {fileID: 1176338965}
+  - {fileID: 1124011338}
+  - {fileID: 1781389687}
+  - {fileID: 2012092506}
+  - {fileID: 487594435}
+  - {fileID: 811845991}
+  - {fileID: 1436489778}
+  - {fileID: 1075033114}
+  - {fileID: 1026885017}
+  - {fileID: 2094721154}
+  - {fileID: 989609611}
 --- !u!1 &206160412
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +375,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &221520723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,7 +607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &394562118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +696,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &397127599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,7 +785,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &398592200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,7 +991,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &487594436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1495,7 +1540,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &811845992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,7 +1987,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 989609609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11, y: 10, z: 0}
+  m_LocalPosition: {x: 14, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193564692}
@@ -1950,7 +1995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 10}
+  m_AnchoredPosition: {x: 14, y: 10}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &989609611
@@ -1985,7 +2030,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &989609612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2093,7 +2138,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1026885015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11, y: 10, z: 0}
+  m_LocalPosition: {x: -14, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193564692}
@@ -2101,7 +2146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: 10}
+  m_AnchoredPosition: {x: -14, y: 10}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1026885017
@@ -2136,7 +2181,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1026885018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2225,7 +2270,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1075033115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2320,7 +2365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1124011339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2509,7 +2554,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1157606508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2598,7 +2643,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1164229831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2687,7 +2732,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1171579253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1176338966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,7 +2910,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1189415695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2910,7 +2955,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1193564691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 220.16354, y: -2.300003, z: 0}
+  m_LocalPosition: {x: 225, y: -2.300003, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_Children:
   - {fileID: 1026885016}
@@ -2922,8 +2967,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 220.16354, y: -2.300003}
-  m_SizeDelta: {x: -500.9, y: -40}
+  m_AnchoredPosition: {x: 225, y: -2.300003}
+  m_SizeDelta: {x: -490, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193564693
 MonoBehaviour:
@@ -3234,7 +3279,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1243536626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3323,7 +3368,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1436489779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3412,7 +3457,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1468611959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3501,7 +3546,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1500039924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3661,7 +3706,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1519785145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3821,7 +3866,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1614399460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4100,7 +4145,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1739838480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4260,7 +4305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1781389688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4349,7 +4394,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1806094087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4438,7 +4483,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1808559433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4527,7 +4572,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1829569451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4616,7 +4661,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &1849754347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4821,7 +4866,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
 --- !u!114 &1910624749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4980,7 +5025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &2012092507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5153,7 +5198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &2035234000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5199,7 +5244,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2094721152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8000002, y: 10, z: 0}
+  m_LocalPosition: {x: 1, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193564692}
@@ -5207,7 +5252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8, y: 10}
+  m_AnchoredPosition: {x: 1, y: 10}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2094721154
@@ -5242,7 +5287,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 
 --- !u!114 &2094721155
 MonoBehaviour:
   m_ObjectHideFlags: 0
