@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
+﻿using NUnit.Framework;
+using System;
 using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
 
 [TestFixture]
-public class ScoreManagerTest {
-	
+public class ScoreManagerTest 
+{
 	[Test]
-	public void T00PassingTest () 
+	public void T00PassingTest() 
     {
-		Assert.AreEqual(1, 1);
+		Assert.AreEqual(1 , 1);
 	}
 
 	[Test]

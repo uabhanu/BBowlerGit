@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour 
 {
     Ball m_ball;
-    List<int> m_bowls = new List<int>();
+    List<int> m_rolls = new List<int>();
     PinSetter m_pinSetter;
     ScoreDisplay m_scoreDisplay;
 
@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            m_bowls.Add(pinFall);
-            BhanuAction.Action nextAction = BhanuAction.NextAction(m_bowls);
+            m_rolls.Add(pinFall);
+            BhanuAction.Action nextAction = BhanuAction.NextAction(m_rolls);
             m_pinSetter.PerformAction(nextAction);
             m_ball.Reset();
         }
@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
 
         try
         {
-            m_scoreDisplay.FillRollCard(m_bowls);
+            m_scoreDisplay.FillFrames(ScoreManager.ScoreCumulative(m_rolls));
+            m_scoreDisplay.FillRolls(m_rolls);
         }
         catch
         {

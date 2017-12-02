@@ -5,7 +5,6 @@ using UnityEngine;
 public class PinSetter : MonoBehaviour 
 {
     Animator m_animator;
-    BhanuAction m_bhanuAction = new BhanuAction(); //Keep this here in global scope as we need only 1 instance
     GameObject m_pinsPrefabInScene;
     Pin[] m_pins;
     PinCounter m_pinCounter;

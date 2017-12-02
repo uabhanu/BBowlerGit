@@ -1,94 +1,71 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class BhanuAction
+public static class BhanuAction 
 {
-    int bowl = 1;
-    int[] bowls = new int[21];
-
-    public enum Action{TIDY , RESET , ENDTURN , ENDGAME};
-
-	Action Bowl(int pins)
+	public enum Action {TIDY , RESET , ENDTURN , ENDGAME , UNDEFINED};
+	
+	public static Action NextAction (List<int> rolls) 
     {
-        if(pins < 0 || pins > 10){throw new UnityException("Sir Bhanu, Pins count is not equal to 10");}
-
-        bowls[bowl - 1] = pins;
-
-        if(bowl == 21)
-        {
-            return Action.ENDGAME;
-        }
-
-        if(bowl >= 19 && pins == 10)
-        {
-            bowl ++;
-            return Action.RESET;
-        }
-
-        else if(bowl == 20)
-        {
-            bowl++;
-
-            if(bowls[19-1] == 10 && bowls[20-1] == 0)
+        Action nextAction = Action.UNDEFINED;
+		
+        for(int i = 0; i < rolls.Count; i++) // Step through rolls
+        { 
+			
+			if(i == 20) 
             {
-                return Action.TIDY;
-            }
+                nextAction = Action.ENDGAME;
+			} 
 
-            else if(bowls[19-1] + bowls[20-1] == 10)
+            else if( i >= 18 && rolls[i] == 10 ) // Handle last-frame special cases
             {
-                return Action.RESET;
-            }
+                nextAction = Action.RESET;
+			} 
 
-            else if(Bowl21Awarded())
+            else if(i == 19) 
             {
-                return Action.TIDY;
-            }
+				if(rolls[18] == 10 && rolls[19] == 0) 
+                {
+                    nextAction = Action.TIDY;
+				} 
 
-            else
+                else if(rolls[18] + rolls[19] == 10) 
+                {
+                    nextAction = Action.RESET;
+				} 
+
+                else if(rolls [18] + rolls[19] >= 10)   // Roll 21 awarded
+                {
+                    nextAction = Action.TIDY;
+				} 
+
+                else 
+                {
+                    nextAction = Action.ENDGAME;
+				}
+
+			} 
+
+            else if(i % 2 == 0)  // First bowl of frame
             {
-                return Action.ENDGAME;
-            }
-        }
+				if(rolls[i] == 10) 
+                {
+					rolls.Insert(i , 0); // Insert virtual 0 after strike
+                    nextAction = Action.ENDTURN;
+				} 
+                else 
+                {
+                    nextAction = Action.TIDY;
+				}
+			} 
 
-        if(bowl % 2 != 0)
-        {
-            if(pins == 10)
+            else  // Second bowl of frame
             {
-                bowl += 2;
-                return Action.ENDTURN;
-            }
-            else
-            {
-                bowl += 1;
-                return Action.TIDY;
-            }
-        }
-
-        else if(bowl % 2 == 0)
-        {
-            bowl += 1;
-            return Action.ENDTURN;
-        }
-
-        throw new UnityException("Sir Bhanu, not sure what action to return");
-    }
-
-    public static Action NextAction(List<int> pinFalls)
-    {
-        BhanuAction bhanuAction = new BhanuAction();
-        Action currentAction = new Action();
-
-        foreach(int pinFall in pinFalls)
-        {
-            currentAction = bhanuAction.Bowl(pinFall);
-        }
-
-        return currentAction;
-    }
-
-    bool Bowl21Awarded()
-    {
-        return(bowls[19-1] + bowls[20-1] >= 10);
-    }
+                nextAction = Action.ENDTURN;
+			}
+		}
+		
+		return nextAction;
+	}
 }

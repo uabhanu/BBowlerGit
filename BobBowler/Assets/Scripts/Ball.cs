@@ -34,9 +34,13 @@ public class Ball : MonoBehaviour
 
     public void Nudge(float amount)
     {
+        float xPos = Mathf.Clamp(transform.position.x + amount , -43.5f , 43.5f);
+        float yPos = transform.position.y;
+        float zPos = transform.position.z;
+
         if(!m_inPlay)
         {
-            transform.Translate(new Vector3(amount , 0f , 0f));      
+            transform.position = new Vector3(xPos , yPos , zPos);
         }
     }
 
