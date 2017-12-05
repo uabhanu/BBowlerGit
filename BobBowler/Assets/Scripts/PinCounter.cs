@@ -58,11 +58,8 @@ public class PinCounter : MonoBehaviour
         m_lastStandingCount = -1;
         int standingPins = StandingPins();
         int pinsFell = m_lastSettledCount - standingPins;
-        m_lastSettledCount = standingPins; //Comment this line if any issues
+        m_lastSettledCount = standingPins;
         m_gameManager.Bowl(pinsFell);
-
-        //Debug.Log("Pins Fell : " + pinsFell + " " + action);
-        //Debug.Log("Pins Standing : " + standingPins + " " + action);
     }
 
     public void PinsStandingAndSettle()

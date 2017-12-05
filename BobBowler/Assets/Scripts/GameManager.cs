@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         catch
         {
             Debug.LogWarning("Sir Bhanu, FillRollCard() Method failed for some reason");
+            m_scoreDisplay.FillRolls(m_rolls);
         }
 	}
 }

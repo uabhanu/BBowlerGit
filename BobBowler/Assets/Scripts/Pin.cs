@@ -45,7 +45,6 @@ public class Pin : MonoBehaviour
             float tiltX = Mathf.Abs(rotationInEuler.x);
             float tiltZ = Mathf.Abs(rotationInEuler.z);
 
-            //Debug.Log(tiltX < m_standingThreshold || tiltZ < m_standingThreshold);
             return(tiltX < m_standingThreshold || tiltZ < m_standingThreshold);
         }
         else
@@ -81,12 +80,9 @@ public class Pin : MonoBehaviour
     {
         if(m_pinBody != null && m_isStanding) 
         {
-            //Debug.Log("Pins Raise");
-            Debug.Log(m_pinBody.gameObject.name);
             m_pinBody.useGravity = false;
             transform.Translate(new Vector3(0f , m_distanceToRaise , 0f) , Space.World); 
             transform.rotation = Quaternion.Euler(270f , 0f , 0f);
-            //This is only applying randomly to selected number of standing pins rather than all standing pins, question posted on Udemy
         }
         else
         {
